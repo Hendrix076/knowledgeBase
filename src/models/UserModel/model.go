@@ -1,6 +1,7 @@
 package UserModel
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -21,20 +22,12 @@ func NewUseModel(attr ...UserModelAttrFunc) *UserModel {
 	UserModelAttrFuncs(attr).Apply(u)
 	return u
 }
+func (this *UserModel) String() string {
+	str := fmt.Sprintf(`{UserId:%d,UserName:%s,UserPhone:%s,UserPassword:%s,userStatus:%d,StatusChangeTime:%s,OpenTime:%s,LastLoginTime:%s}`,
+		this.Id, this.Name , this.Phone,this.Password,this.Status,this.StatusChangeTime.Format("2006-01-02 15:04:05"),this.OpenTime.Format("2006-01-02 15:04:05"),this.LastLoginTime.Format("2006-01-02 15:04:05"))
+	return str
+}
 func (this *UserModel)Mutate(attr ...UserModelAttrFunc)*UserModel{
 	UserModelAttrFuncs(attr).Apply(this)
 	return this
-}
-type UserLoginLog struct {
-	Id        int       `gorm:"column:id"`
-	Operator  int       `gorm:"column:operator"`
-	Ip        string    `gorm:"column:ip"`
-	timestamp time.Time `gorm:"column:timestamp"`
-}
-type kbUser struct {
-	Id       int       `gorm:"column:id"`
-	kbId     int       `gorm:"column:kb_id"`
-	UserId   int       `gorm:"column:user_id"`
-	JoinTime time.Time `gorm:"column:join_time"`
-	CanEdit  string    `gorm:"column:can_edit"`
 }
