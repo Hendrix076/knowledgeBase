@@ -15,7 +15,9 @@ type UserModel struct {
 	OpenTime         time.Time `json:"open_time" gorm:"column:open_time"`
 	LastLoginTime    time.Time `json:"last_login_time" gorm:"column:last_login_time"`
 }
-
+type RespUserInfo struct {
+	Result interface{}
+}
 func NewUseModel(attr ...UserModelAttrFunc) *UserModel {
 
 	u := &UserModel{}
