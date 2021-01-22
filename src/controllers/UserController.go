@@ -23,6 +23,6 @@ func (this *UserController) Create(c *gin.Context) string {
 
 
 func (this *UserController) Build(goft *goft.Goft) {
-	goft.Handle("GET", "/userinfo", this.Create)
+	goft.Handle("GET", "/userinfo", )
 	goft.Handle("POST","/accesstoken",this.accesstoken)
 }
