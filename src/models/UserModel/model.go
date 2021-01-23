@@ -16,11 +16,11 @@ type UserModel struct {
 	LastLoginTime    time.Time `json:"last_login_time" gorm:"column:last_login_time"`
 }
 type ResUserInfo struct {
-	Users []int `form:"users"`
+	Users []int `json:"users"`
 }
 
 type Userinfo struct {
-	UserId int `json:"user_id"`
+	UserId int `json:"user_id"   `
 	Username string `json:"username"`
 	UserHead string `json:"user_head"`
 }

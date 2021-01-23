@@ -14,8 +14,12 @@ type UserService struct {
 func NewUserService() *UserService {
 	return &UserService{}
 }
-func (this *UserService)Userinfo(userId []int)(userInfolist *[]UserModel.Userinfo){
+func (this *UserService)Userinfo(userId []int)([]*UserModel.Userinfo,error){
 
-	return this.UserDao.GetUserinfo(this.DB,userId)
+	_,err:=this.UserDao.GetUserinfo(this.DB,userId)
+	if err !=nil{
+		return nil, nil
+	}
+	return nil ,nil
 
 }

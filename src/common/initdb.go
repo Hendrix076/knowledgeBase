@@ -9,33 +9,28 @@ import (
 	"time"
 )
 
-var (
-	Orm *gorm.DB
-)
+type DBconfig struct{}
 
-func init() {
-	Orm = gormDB()
+func NewDBconfig() *DBconfig {
+	return &DBconfig{}
 }
 
-func gormDB() *gorm.DB {
-	var newLogger = logger.New(
-		// io.writer同样使用colorable
+func (this *DBconfig) GormDB() *gorm.DB {
+	newLogger := logger.New(
 		log.New(colorable.NewColorableStdout(), "\r\n", log.LstdFlags),
 		logger.Config{
-			SlowThreshold: time.Second, // 慢 SQL 阈值
-			LogLevel:      logger.Info, // Log level
-			Colorful:      true,        // 开启彩色打印
+			LogLevel: logger.Info,
+			Colorful: true,
 		},
 	)
-	orm, err := gorm.Open(mysql.Open("devuser:123~!@@tcp(39.105.28.235:3320)/tech?charset=utf8mb4&parseTime=true&loc=Local"),
-		&gorm.Config{Logger: newLogger})
+	db, err := gorm.Open(mysql.Open("devuser:123~!@@tcp(39.105.28.235:3320)/tech?charset=utf8mb4&parseTime=true&loc=Local"), &gorm.Config{Logger: newLogger})
 	if err != nil {
 		log.Fatal(err)
 	}
-	mysqlDB, _ := orm.DB()
+	mysqlDB, _ := db.DB()
 	mysqlDB.SetConnMaxLifetime(30 * time.Second)
 	mysqlDB.SetMaxIdleConns(5)
 	mysqlDB.SetMaxOpenConns(10)
 
-	return orm
+	return db
 }

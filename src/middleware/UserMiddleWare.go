@@ -3,9 +3,7 @@ package middleware
 import (
 	"crypto/sha256"
 	"encoding/hex"
-	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"knowledgeBase/src/common"
 	"knowledgeBase/src/models/UserModel"
 )
 
@@ -32,20 +30,20 @@ func GenUserToken(user *UserModel.UserModel)(string,error)  {
 
 	return GenerateToken(payLoad)
 }
-// 登录校验
-func  LoginCheck(user *UserModel.UserModel) (*UserModel.UserModel, error) {
-
-	var u UserModel.UserModel
-	// 查询用户
-	err := common.Orm.Where("phone = ? ", user.Phone).First(&u).Error
-	if err != nil {
-
-		return nil, err
-	}
-
-	if u.Password!=user.Password {
-		return nil,errors.New("密码不正确")
-	}
-
-	return &u, err
-}
+//// 登录校验
+//func  LoginCheck(user *UserModel.UserModel) (*UserModel.UserModel, error) {
+//
+//	var u UserModel.UserModel
+//	// 查询用户
+//	err := .Where("phone = ? ", user.Phone).First(&u).Error
+//	if err != nil {
+//
+//		return nil, err
+//	}
+//
+//	if u.Password!=user.Password {
+//		return nil,errors.New("密码不正确")
+//	}
+//
+//	return &u, err
+//}
