@@ -8,5 +8,6 @@ import (
 )
 
 func main() {
-	goft.Ignite().Config(common.NewDBconfig(),configuration.NewServiceConfig()).Mount("v1",controllers.NewUserController()).Launch()
+	goft.Ignite().Config(common.NewDBconfig(),configuration.NewServiceConfig()).
+		Mount("v1",controllers.NewUserController()).Launch()
 }
