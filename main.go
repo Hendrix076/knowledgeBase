@@ -1,13 +1,15 @@
 package main
 
 import (
-	"github.com/shenyisyn/goft-gin/goft"
+	"github.com/gin-gonic/gin"
 	"knowledgeBase/src/common"
-	"knowledgeBase/src/configuration"
 	"knowledgeBase/src/controllers"
 )
 
 func main() {
-	goft.Ignite().Config(common.NewDBconfig(),configuration.NewServiceConfig()).
-		Mount("v1",controllers.NewUserController()).Launch()
+	common.InitDB()
+	r := gin.New()
+	r.Handle("POST", "/userinfo", controllers.UserInfoList)
+	r.Handle("POST", "/access_token", controllers.UserAccessToken)
+	r.Run(":8080")
 }
