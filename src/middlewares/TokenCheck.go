@@ -81,3 +81,13 @@ func  ParseUserToken(user *UserModel.UserModel) (*TokenCheck, error) {
 	}
 	return claims,nil
 }
+
+func ErrorHandler()gin.HandlerFunc{
+	return func(c *gin.Context) {
+		defer func(){
+			if e:=recover();e!=nil {
+				c.AbortWithStatusJSON(400,gin.H{"message":e})
+			}
+		}()
+	}
+}

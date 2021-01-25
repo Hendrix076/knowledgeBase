@@ -24,7 +24,7 @@ func NewUserGetterImpl() *UserGetterImpl {
 }
 
 func (this *UserGetterImpl) FindByphone(phone string) (user *UserModel.UserModel,err error) {
-
+	user=&UserModel.UserModel{}
 	err=common.Gorm.Raw("select * from users where phone =?",phone).First(user).Error
 	if err !=nil {
 		return nil, err

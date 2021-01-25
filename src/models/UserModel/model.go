@@ -26,7 +26,7 @@ type Userinfo struct {
 	UserHead string `json:"user_head" gorm:"column:user_head" `
 }
 
-func NewUseModel(attr ...UserModelAttrFunc) *UserModel {
+func NewUserModel(attr ...UserModelAttrFunc) *UserModel {
 
 	u := &UserModel{}
 	UserModelAttrFuncs(attr).Apply(u)
