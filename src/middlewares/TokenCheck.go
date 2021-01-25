@@ -89,5 +89,7 @@ func ErrorHandler()gin.HandlerFunc{
 				c.AbortWithStatusJSON(400,gin.H{"message":e})
 			}
 		}()
+		c.Next()
 	}
+
 }
